@@ -125,6 +125,9 @@ def test_schema() -> None:
 
 
 def test_config() -> None:
+
+
+
     class Config:
         orm_mode = True
         allow_population_by_field_name = True
@@ -132,8 +135,8 @@ def test_config() -> None:
         @classmethod
         def alias_generator(cls, string: str) -> str:
             pascal_case = "".join(word.capitalize() for word in string.split("_"))
-            camel_case = pascal_case[0].lower() + pascal_case[1:]
-            return camel_case
+            return pascal_case[0].lower() + pascal_case[1:]
+
 
     PydanticUser = sqlalchemy_to_pydantic(User)
     PydanticAddress = sqlalchemy_to_pydantic(Address, config=Config)
